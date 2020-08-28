@@ -33,23 +33,17 @@
                 console.log("dataObject is", dataObject);
                 console.log("loaded")
                 var foamtree = new CarrotSearchFoamTree({
-
-
-
                     groupMinDiameter: 0,
                     groupLabelVerticalPadding: 0.2,
                     groupExposureZoomMargin: 0.2,
                     zoomMouseWheelDuration: 300,
                     openCloseDuration: 200,
-
-
-
                     dataObject,
                     id: "visualization",
-                    layout: 'ordered',
+                    layout: 'squarified',
                     stacking: 'flattened',
                     // groupLabelMinFontSize: 30,3
-                    // layoutByWeightOrder: false,
+                    layoutByWeightOrder: false,
                     rolloutDuration: 0,
                     pullbackDuration: 0,
                     fadeDuration: 0,
