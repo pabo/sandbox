@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>treemap</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <style>
+        #container {
+            align-items: stretch;
+            display: flex;
+            height: 100%;
+            position: relative;
+            width: 100%;
+        }
+
+        #visualization {
+            flex: 1;
+            width: 100%;
+            height: 1000px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="visualization"></div>
+    </div>
+    <script src="carrotsearch.foamtree.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            fetch("treemap.json").then(result => result.json().then(dataObject => {
+                console.log("dataObject is", dataObject);
+                console.log("loaded")
+                var foamtree = new CarrotSearchFoamTree({
+
+
+
+                    groupMinDiameter: 0,
+                    groupLabelVerticalPadding: 0.2,
+                    groupExposureZoomMargin: 0.2,
+                    zoomMouseWheelDuration: 300,
+                    openCloseDuration: 200,
+
+
+
+                    dataObject,
+                    id: "visualization",
+                    layout: 'ordered',
+                    stacking: 'flattened',
+                    // groupLabelMinFontSize: 30,3
+                    // layoutByWeightOrder: false,
+                    rolloutDuration: 0,
+                    pullbackDuration: 0,
+                    fadeDuration: 0,
+                    maxGroups: Infinity,
+                    maxGroupLevelsDrawn: Infinity,
+                    maxGroupLabelLevelsDrawn: Infinity,
+                    maxGroupLevelsAttached: Infinity,
+
+                    onGroupClick(event) {
+                        console.log(this)
+                        console.log(event.group)
+                    },
+
+                    // groupLabelLayoutDecorator: (opts, props, vars) => {
+                    //     // vars.maxTotalTextHeight = .25;
+                    // }
+
+                });
+
+            }))
+        });
+    </script>
+</body>
+
+</html>
