@@ -23,13 +23,36 @@
 </head>
 
 <body>
+    <div id="config">
+        <input type="text" id="jsonDataUrl" placeholder="treemap.json" onchange="changedUrl(this.value)"/>
+        <input type="text" id="teamCityToken" placeholder="TEAM_CITY_TOKEN" onchange="changedToken(this.value)"/>
+        <input type="button" id="go" value="Go!" onclick="fetchAndDisplay()"/>
+    </div>
     <div id="container">
         <div id="visualization"></div>
     </div>
     <script src="carrotsearch.foamtree.js"></script>
     <script>
-        window.addEventListener("load", function () {
-            fetch("treemap.json").then(result => result.json().then(dataObject => {
+
+        let teamCityToken = '';
+        let jsonDataUrl = 'treemap.json';
+
+        function changedUrl(value) {
+            jsonDataUrl = value;
+        }
+
+        function changedToken(value) {
+            teamCityToken = value;
+        }
+
+        window.addEventListener("load", fetchAndDisplay);
+        
+        function fetchAndDisplay() {
+            fetch(jsonDataUrl, {
+                headers: {
+                    Authorization: `Bearer ${teamCityToken}`,
+                },
+            }).then(result => result.json().then(dataObject => {
                 console.log("dataObject is", dataObject);
                 console.log("loaded")
                 var foamtree = new CarrotSearchFoamTree({
@@ -64,7 +87,8 @@
                 });
 
             }))
-        });
+        }
+        
     </script>
 </body>
 
